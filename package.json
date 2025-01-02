@@ -16,6 +16,7 @@
   "dependencies": {
     "@prisma/client": "^6.1.0",
     "@types/uuid": "^10.0.0",
+    "bcrypt": "^5.1.1",
     "express": "^4.21.2",
     "uuid": "^11.0.3",
     "winston": "^3.17.0",
@@ -25,6 +26,7 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-typescript": "^7.26.0",
     "@jest/globals": "^29.7.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/supertest": "^6.0.2",
