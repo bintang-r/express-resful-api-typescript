@@ -2,12 +2,14 @@ import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
 import {
   CreateUserRequest,
+  LoginUserRequest,
   toUserResponse,
   UserResponse,
 } from "../model/user-model";
 import { UserValidation } from "../validation/user-validation";
 import { Validation } from "../validation/validation";
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
 
 export class UserService {
   static async register(request: CreateUserRequest): Promise<UserResponse> {
@@ -36,6 +38,37 @@ export class UserService {
     });
 
     // make a response
+    return toUserResponse(user);
+  }
+
+  static async login(request: LoginUserRequest): Promise<UserResponse> {
+    const loginRequest = Validation.validate(UserValidation.LOGIN, request);
+
+    // Find user by username
+    let user = await prismaClient.user.findUnique({
+      where: {
+        username: loginRequest.username,
+      },
+    });
+
+    // Validate user and password
+    if (
+      !user ||
+      !(await bcrypt.compare(loginRequest.password, user.password))
+    ) {
+      throw new ResponseError(401, "Invalid credentials");
+    }
+
+    // Update user's token
+    user = await prismaClient.user.update({
+      where: {
+        username: loginRequest.username,
+      },
+      data: {
+        token: uuid(),
+      },
+    });
+
     return toUserResponse(user);
   }
 }

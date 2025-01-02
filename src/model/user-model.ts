@@ -12,9 +12,15 @@ export type CreateUserRequest = {
   password: string;
 };
 
+export type LoginUserRequest = {
+  username: string;
+  password: string;
+};
+
 export function toUserResponse(user: User): UserResponse {
   return {
     name: user.name,
     username: user.username,
+    token: user.token!,
   };
 }

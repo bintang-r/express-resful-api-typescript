@@ -3,7 +3,7 @@ import { web } from "../application/web";
 import { logger } from "../application/logging";
 import { UserTest } from "./test-util";
 
-describe("POST api/users", () => {
+describe("POST /api/users", () => {
   afterEach(async () => {
     await UserTest.delete();
   });
@@ -31,5 +31,24 @@ describe("POST api/users", () => {
     expect(response.status).toBe(200);
     expect(response.body.data.username).toBe("test");
     expect(response.body.data.name).toBe("test");
+  });
+});
+
+describe("POST /api/users/login", () => {
+  beforeEach(async () => {
+    await UserTest.create();
+  });
+
+  it("should login user", async () => {
+    const response = await supertest(web).post("/api/users/login").send({
+      username: "test",
+      password: "test",
+    });
+
+    logger.debug(response.body);
+    expect(response.status).toBe(200);
+    expect(response.body.data.username).toBe("test");
+    expect(response.body.data.name).toBe("test");
+    expect(response.body.data.token).toBeDefined();
   });
 });
