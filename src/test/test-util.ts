@@ -3,6 +3,18 @@ import { prismaClient } from "../application/database";
 import bcrypt from "bcrypt";
 import { ContactResponse } from "../model/contact-model";
 
+export class AddressTest {
+  static async deleteAll() {
+    await prismaClient.address.deleteMany({
+      where: {
+        contact: {
+          username: "test",
+        },
+      },
+    });
+  }
+}
+
 export class ContactTest {
   static async deleteAll() {
     await prismaClient.contact.deleteMany({
