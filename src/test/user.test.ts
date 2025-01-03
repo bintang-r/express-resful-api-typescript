@@ -2,7 +2,7 @@ import supertest from "supertest";
 import { web } from "../application/web";
 import { logger } from "../application/logging";
 import { UserTest } from "./test-util";
-import bcrypt, { compare } from "bcrypt";
+import bcrypt from "bcrypt";
 
 describe("POST /api/users", () => {
   afterEach(async () => {
