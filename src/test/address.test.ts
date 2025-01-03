@@ -156,4 +156,44 @@ describe("PUT /api/contacts/:contactId/addresses/:addressId", () => {
     expect(response.body.data.country).toBe("Indonesia");
     expect(response.body.data.postal_code).toBe("9980");
   });
+
+  it("should reject update address if data is invalid", async () => {
+    const contact = await ContactTest.get();
+    const address = await AddressTest.get();
+
+    const response = await supertest(web)
+      .put(`/api/contacts/${contact.id}/addresses/${address.id}`)
+      .set("X-API-TOKEN", "test")
+      .send({
+        street: "Jalan Perintis Kemerdekaan",
+        city: "Kota Makassar",
+        province: "Sulawesi Selatan",
+        country: "",
+        postal_code: "",
+      });
+
+    logger.debug(response.body);
+    expect(response.status).toBe(400);
+    expect(response.body.errors).toBeDefined();
+  });
+
+  it("should reject update address if address is not found", async () => {
+    const contact = await ContactTest.get();
+    const address = await AddressTest.get();
+
+    const response = await supertest(web)
+      .put(`/api/contacts/${contact.id}/addresses/${address.id + 1}`)
+      .set("X-API-TOKEN", "test")
+      .send({
+        street: "Jalan Perintis Kemerdekaan",
+        city: "Kota Makassar",
+        province: "Sulawesi Selatan",
+        country: "Indonesia",
+        postal_code: "9980",
+      });
+
+    logger.debug(response.body);
+    expect(response.status).toBe(404);
+    expect(response.body.errors).toBeDefined();
+  });
 });
