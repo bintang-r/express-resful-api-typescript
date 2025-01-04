@@ -1,0 +1,135 @@
+### Register user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "Bintang Kun",
+  "password" : "bintang123",
+  "name" : "Muhammad Bintang"
+}
+
+### Login User
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "Bintang Kun",
+  "password" : "bintang123"
+}
+
+
+### Get User
+GET http://localhost:3000/api/users/current
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+### Logout User
+DELETE http://localhost:3000/api/users/current
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+### Update User
+PATCH http://localhost:3000/api/users/current
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+{
+  "name" : "Muh Bintang"
+}
+
+### Update User Password
+PATCH http://localhost:3000/api/users/current
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+{
+  "password" : "rahasia"
+}
+
+### Create Contact
+POST http://localhost:3000/api/contacts
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+{
+  "first_name" : "Fery",
+  "last_name" : "Fadul",
+  "email": "feryfadulrahman@gmail.com",
+  "phone" : "099123123213"
+}
+
+### Update Contact
+PUT http://localhost:3000/api/contacts/2018
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+{
+  "first_name" : "Fery",
+  "last_name" : "Kocak Gemink",
+  "email": "ferykocakgemink@gmail.com",
+  "phone" : "099123123213"
+}
+
+### Get Contact
+GET http://localhost:3000/api/contacts/2018
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+### Remove Contact
+DELETE http://localhost:3000/api/contacts/2018
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+### Search Contact
+GET http://localhost:3000/api/contacts
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+### Add Address
+POST http://localhost:3000/api/contacts/2019/addresses
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+{
+  "street" : "Jalan B",
+  "city": "Jakarta",
+  "province" : "DKI Jakarta",
+  "country" : "Indonesia",
+  "postal_code" : "13123"
+}
+
+### Get Address
+GET http://localhost:3000/api/contacts/2019/addresses/454
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+### Update Address
+PUT http://localhost:3000/api/contacts/2019/addresses/454
+Accept: application/json
+Content-Type: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+{
+  "street" : "Jalan C",
+  "city": "Bandung",
+  "province" : "Jawa Barat",
+  "country" : "Indonesia",
+  "postal_code" : "34534"
+}
+
+### List Address
+GET http://localhost:3000/api/contacts/2019/addresses
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
+
+### Remove Address
+DELETE http://localhost:3000/api/contacts/2019/addresses/454
+Accept: application/json
+X-API-TOKEN: 2566d49f-da84-4d28-b13b-4d00e3b9d055
