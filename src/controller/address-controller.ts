@@ -2,7 +2,8 @@ import { Response, NextFunction } from "express";
 import { UserRequest } from "../type/user-request";
 import {
   CreateAddressRequest,
-  getAddressRequest,
+  GetAddressRequest,
+  RemoveAddressRequest,
   UpdateAddressRequest,
 } from "../model/address-model";
 import { AddressService } from "../service/address-service";
@@ -24,7 +25,7 @@ export class AddressController {
 
   static async get(req: UserRequest, res: Response, next: NextFunction) {
     try {
-      const request: getAddressRequest = {
+      const request: GetAddressRequest = {
         id: Number(req.params.addressId),
         contact_id: Number(req.params.contactId),
       };
@@ -46,6 +47,21 @@ export class AddressController {
       const response = await AddressService.update(req.user!, request);
       res.status(200).json({
         data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async remove(req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      const request: RemoveAddressRequest = {
+        id: Number(req.params.addressId),
+        contact_id: Number(req.params.contactId),
+      };
+      const response = await AddressService.remove(req.user!, request);
+      res.status(200).json({
+        data: "Ok",
       });
     } catch (e) {
       next(e);
