@@ -1,12 +1,12 @@
 # Setup Project
 
-Create .env file :
+Create .env File :
 
 ```
-DATABASE_URL="mysql://root:@localhost:3306/belajar_typescript_restful_api"
+DATABASE_URL="mysql://pass:@localhost:port/database_lu"
 ```
 
-terminal command :
+Terminal Command :
 
 ```shell
 npm install
